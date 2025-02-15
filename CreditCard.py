@@ -1,7 +1,7 @@
 import pandas as pd 
 import numpy as np 
 import pickle
-import dill
+import joblib
 import streamlit as st 
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
@@ -91,7 +91,7 @@ elif(app_mode=='Prediction'):
     Total_Bad_Debt=st.number_input("Enter the Total Bad Debt ", value=None, placeholder="Type a number...")	
     Total_Good_Debt=st.number_input("Enter the Total Good Debt", value=None, placeholder="Type a number...")
     if st.button('predict',type="secondary"):
-       model=dill.load("Credit_card.pkl")
+       model=joblib.load("Credit_card.pkl")
        x=np.array([Owned_Car,Owned_Realty,Total_Income,Total_Bad_Debt,Total_Good_Debt])
        st.markdown(f'### Prediction Is {model.predict([[Owned_Car,Owned_Realty,Total_Income,Total_Bad_Debt,Total_Good_Debt]])}')
        st.markdown(f'The accuracy of model is{gbc_model.score(X_train,y_train)}')   
